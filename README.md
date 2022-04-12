@@ -8,7 +8,7 @@
 - 4.人脸识别 实现一对多 十万分之一误检率 通过准确率50%
 
 # 代码细节与跑的坑
--1.首先声明 这个项目不可开源商用 所以不方便为大家提供已经训练好的任何模型与数据 因为涉及个人隐私 非隐私数据可自行寻找开源数据集
+-1.首先声明 这个项目不可开源商用 所以不方便为大家提供已经训练好的任何模型与数据，并且也不提供任何数据集 因为涉及个人隐私 非隐私数据可自行寻找开源数据集
 
 -2.第一个坑 提供的yoloV3 代码如果说自行训练，90%的概率梯度不下降，因为不是标准U版代码实现 没有使用梯度累计 数据增强 学习率退火等优化方法 ，
 如果你的显卡设备显存不够大 请不要使用此代码，batchsize太小了训练不出来啊
@@ -25,15 +25,44 @@
  
 # 项目讲解
 # yoloV3
-使用U版就行没什么好说的
+使用U版就行没什么好说的 个人推荐连接 自带教程：https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/pytorch_object_detection/yolov3_spp
 数据集大家找找应该可以找到的 大概名称是yolo_widerface_open_train 我也不好乱发出来
 网络结构
  ![image](https://user-images.githubusercontent.com/65523997/162977659-c5081bb3-c4c1-46e4-b015-59ae34423b59.png)
 ![image](https://user-images.githubusercontent.com/65523997/162977702-f5380ed5-6cb5-479d-81cf-dc040013091f.png)
 学习率预热与退火策略可视化
 ![image](https://user-images.githubusercontent.com/65523997/162977856-5110b03f-4b8f-4f17-ae8c-a97f42d5829c.png)
+
 loss函数
 ![image](https://user-images.githubusercontent.com/65523997/162977917-0da9431a-bafd-4a68-aa24-84e445261d35.png)
+
 这里说一下，如果说训练时难以拟合的时候 建议在yolo的训练代码里将 anchors的权重适当增加，或者说那个部分的loss降不下去就将对应的公式权重增加
+另外梯度累计与数据增强大家也要看一下 不多废话想必学习这个项目的人都有这个基础了
+
+# 人脸108关键点检测 多任务
+
+96关键点检测多任务实现
+系统架构
+![image](https://user-images.githubusercontent.com/65523997/162979445-10280313-8778-4775-bd1c-476f27eacd72.png)
+
+这里是多任务所使用的的loss函数
+
+![image](https://user-images.githubusercontent.com/65523997/162979465-95743e5f-85fd-4f4f-8c3c-3e99d248a6d5.png)
+
+![image](https://user-images.githubusercontent.com/65523997/162979534-1e56019d-883b-41a9-bc2a-6acf2d9b673a.png)
+
+当∣ x ∣ < w 时，主体是一个对数函数，另外还有两个控制参数，分别是w和ε，其他取值时是一个L1损失。要找合适的 w 和 ϵ 值，要进行调参，推荐的参数如下表所示：
+![image](https://user-images.githubusercontent.com/65523997/162979733-2174fc9d-91c8-4d66-9b38-b30ada36faf6.png)
+
+数据集的名称貌似是 wiki_crop_face_multi_task 格式如下
+
+![image](https://user-images.githubusercontent.com/65523997/162979844-1bd67402-f02a-4355-8428-9d6782cedea6.png)
+
+数据增强的逻辑
+
+送入网络中图像如下图所示：（第一排是原始图像，第二排是送入网络中的图像）
+
+![Uploading image.png…]()
+
 
 
