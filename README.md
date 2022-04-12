@@ -46,6 +46,9 @@ loss函数
 
 96关键点检测多任务实现
 系统架构
+![image](https://user-images.githubusercontent.com/65523997/162980530-5b0cb893-3522-4844-9219-daaf57fb747a.png)
+
+
 
 ![image](https://user-images.githubusercontent.com/65523997/162979445-10280313-8778-4775-bd1c-476f27eacd72.png)
 
@@ -53,19 +56,23 @@ loss函数
 
 ![image](https://user-images.githubusercontent.com/65523997/162979465-95743e5f-85fd-4f4f-8c3c-3e99d248a6d5.png)
 
+当∣ x ∣ < w 时，主体是一个对数函数，另外还有两个控制参数，分别是w和ε，其他取值时是一个L1损失。要找合适的 w 和 ϵ 值，要进行调参，推荐的参数如下表所示：
+
+
 ![image](https://user-images.githubusercontent.com/65523997/162979534-1e56019d-883b-41a9-bc2a-6acf2d9b673a.png)
 
-当∣ x ∣ < w 时，主体是一个对数函数，另外还有两个控制参数，分别是w和ε，其他取值时是一个L1损失。要找合适的 w 和 ϵ 值，要进行调参，推荐的参数如下表所示：
+数据集的名称貌似是 wiki_crop_face_multi_task 格式如下
+
 ![image](https://user-images.githubusercontent.com/65523997/162979733-2174fc9d-91c8-4d66-9b38-b30ada36faf6.png)
 
-数据集的名称貌似是 wiki_crop_face_multi_task 格式如下
+
 
  
 数据增强的逻辑
 
 送入网络中图像如下图所示：（第一排是原始图像，第二排是送入网络中的图像）
 
-![Uploading image.png…]()
+ 
 
-
+![image](https://user-images.githubusercontent.com/65523997/162980576-b18ccc39-53e7-4347-9b18-153129031a8e.png)
 
