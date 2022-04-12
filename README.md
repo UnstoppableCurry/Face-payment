@@ -164,8 +164,27 @@ Batch越小,所需步长越大 但是问题来了
 ![image](https://user-images.githubusercontent.com/65523997/162985318-f7c783d8-cbb2-4165-89f3-7dedc0087a62.png)
 SeNet 通道注意力
 大概是这样
+
 ![image](https://user-images.githubusercontent.com/65523997/162985406-f3456582-9e74-49c9-aa77-7ea6f132c8f7.png)
+
 跟resnet差不多就是多加了几个残差链接 在通道上实现了注意力
+不多说看重点
+- 距离度量网络
+   这里作者使用的是特征向量的夹角余弦值 作为相似度评判标准
+   
+   ![image](https://user-images.githubusercontent.com/65523997/162986190-6d070c63-772b-4d9e-b3bd-4267a8c96df2.png)
 
+输入xi是对输入图像进行特征提取得到的，是1*d（d=512）的向量，对该向量执行L2标准化得\frac{x_i}{\left | x_i \right |}
 
+向量W是d*n的矩阵，n表示分类的类别数，对每一列（Wj）进行L2标准化，得到\frac{W_j}{\left | W_j \right |}
+
+\frac{x_i}{\left | x_i \right |} 和 \frac{W_j}{\left | W_j \right |} 进行相乘得到输出\cos (assets/02125263ce879539f7b10cf90b64018d.gif)，因为向量相乘可以表示为 \frac{x_i}{\left | x_i \right |} * \frac{W_j}{\left | W_j \right |}*\cos (assets/66c123cd3519da760ad6ef2ecedeb7cd.gif)，前面两项都为1，所以结果就是\cos (\theta _j)，j \in [1...n]
+
+接下来对输出中对应真实标签的值\cos (assets/ee126c5b97bedb2e812062069996742f.gif)执行反余弦操作就得到 \theta _{y_i}，y_i 表示真实的标签。
+
+SphereFace、ArcFace和CosFace中都有m参数，这里分别用m1、m2和m3表示，因此这3个算法整合在一起就是\cos (assets/394940ba5a9eb31c1382616fc7c0244f.gif) - m_3
+
+对得到的feature乘以一个scale参数来放大，得到输出 s * \cos (assets/b3bdfe38fbd55c7b813d9d4c17c7fd04.gif)
+
+再将上一步获得的结果输送到softmax函数（以e为底），最后得到预测输出的概率
 
