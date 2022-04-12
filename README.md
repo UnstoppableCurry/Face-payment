@@ -15,9 +15,9 @@
 
 -3.第二个坑 不要试图用本项目提供的yolov3-tiny代码尝试训练。。。 预测可以 但是NMS的实现貌似也跟U版有很大问题，自己联调的时候直接修改U版V3-SPP的NMS 
 如果有需求要同时检测多人就别改，不需要 仅检测一个人的数据则topk取1就行 当然了NMS还有其他两个阈值 也是要看个人喜好进行更改
-![image](https://user-images.githubusercontent.com/65523997/162975652-47f50c12-f0ad-44b1-868d-b9dd12098bf1.png)
-![image](https://user-images.githubusercontent.com/65523997/162975918-87cf0247-a314-4df8-a5b3-283871eb89d7.png)
 
+![image](https://user-images.githubusercontent.com/65523997/162975652-47f50c12-f0ad-44b1-868d-b9dd12098bf1.png)
+ 
 -4.第三个坑 关键点检测与姿态识别的backbone都是使用resnet ，但是96关键点的输出头是三个多任务（关键点-年龄-性别）使用winloss联合训练，个人尝试过将姿态也
 加入winloss中进行进行联合训练，但是精度并不理想代码实现中也有
 ![image](https://user-images.githubusercontent.com/65523997/162975440-6e00f670-ee16-485b-b489-605ea7827986.png)
