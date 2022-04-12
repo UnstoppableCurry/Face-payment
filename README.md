@@ -28,5 +28,12 @@
 使用U版就行没什么好说的
 数据集大家找找应该可以找到的 大概名称是yolo_widerface_open_train 我也不好乱发出来
 网络结构
- ![Uploading image.png…]()
-![Uploading image.png…]()
+ ![image](https://user-images.githubusercontent.com/65523997/162977659-c5081bb3-c4c1-46e4-b015-59ae34423b59.png)
+![image](https://user-images.githubusercontent.com/65523997/162977702-f5380ed5-6cb5-479d-81cf-dc040013091f.png)
+学习率预热与退火策略可视化
+![image](https://user-images.githubusercontent.com/65523997/162977856-5110b03f-4b8f-4f17-ae8c-a97f42d5829c.png)
+loss函数
+![image](https://user-images.githubusercontent.com/65523997/162977917-0da9431a-bafd-4a68-aa24-84e445261d35.png)
+这里说一下，如果说训练时难以拟合的时候 建议在yolo的训练代码里将 anchors的权重适当增加，或者说那个部分的loss降不下去就将对应的公式权重增加
+
+
