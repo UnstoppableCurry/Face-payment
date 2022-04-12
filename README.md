@@ -87,7 +87,10 @@ loss函数
 ![image](https://user-images.githubusercontent.com/65523997/162980926-722dbaa6-2b4f-4bf5-b7e0-40b3bd3f9ebe.png)
 
 如果将姿态任务添加进去呢？
-![loss (2)](https://user-images.githubusercontent.com/65523997/162981072-209f7fd5-34b5-4cd5-9036-af12e386e256.png)
+暴力添加 这里简单说一下，并没有很全的数据 所以直接teacherforcing思想 用训练好的姿态网络作为老师以此计算loss
+![loss (2)](https://user-images.githubusercontent.com/65523997/162981190-9de7c23a-9d02-40c1-ada9-de8666c1bc5d.png)
 
+ 评估时效果很差 再次调整 将姿态任务的loss权重修改后
+![loss](https://user-images.githubusercontent.com/65523997/162981514-e60c1818-7cc7-4b05-a4fa-d035f79b4038.png)
 
 
