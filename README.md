@@ -88,9 +88,21 @@ loss函数
 
 如果将姿态任务添加进去呢？
 暴力添加 这里简单说一下，并没有很全的数据 所以直接teacherforcing思想 用训练好的姿态网络作为老师以此计算loss
+
 ![loss (2)](https://user-images.githubusercontent.com/65523997/162981190-9de7c23a-9d02-40c1-ada9-de8666c1bc5d.png)
 
  评估时效果很差 再次调整 将姿态任务的loss权重修改后
 ![loss](https://user-images.githubusercontent.com/65523997/162981514-e60c1818-7cc7-4b05-a4fa-d035f79b4038.png)
+
+这里有不小的坑 反正自己比较菜即使这样效果也不理想
+
+多任务训练时, 步长一定时, batch越大拟合的越快,但是如果开启数据增强,则拟合的更慢
+Batch越小,所需步长越大 但是问题来了
+
+![image](https://user-images.githubusercontent.com/65523997/162981826-cdd4f3db-d688-4355-8528-3f8190a48ae5.png)
+
+如果按照训练相对时间来看, batchsize 未必越大越好, 相同时间的情况下,batch 越大拟合的未必越快
+
+![image](https://user-images.githubusercontent.com/65523997/162981893-b488438a-1764-4f4c-8dfe-38e525aebccd.png)
 
 
