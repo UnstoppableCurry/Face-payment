@@ -25,8 +25,11 @@
  
 # 项目讲解
 # yoloV3
-使用U版就行没什么好说的 个人推荐连接 自带教程：https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/pytorch_object_detection/yolov3_spp
+使用U版就行没什么好说的
+个人推荐连接 自带教程：https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/pytorch_object_detection/yolov3_spp
+
 数据集大家找找应该可以找到的 大概名称是yolo_widerface_open_train 我也不好乱发出来
+
 网络结构
  ![image](https://user-images.githubusercontent.com/65523997/162977659-c5081bb3-c4c1-46e4-b015-59ae34423b59.png)
 ![image](https://user-images.githubusercontent.com/65523997/162977702-f5380ed5-6cb5-479d-81cf-dc040013091f.png)
