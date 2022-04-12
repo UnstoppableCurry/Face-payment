@@ -105,4 +105,8 @@ Batch越小,所需步长越大 但是问题来了
 
 ![image](https://user-images.githubusercontent.com/65523997/162981893-b488438a-1764-4f4c-8dfe-38e525aebccd.png)
 
+第三张图是学习量相同时的拟合速度,可以见到拟合最快的是batchsize64所以可见batchsize未必越大越好,而是合适就行
+
+![image](https://user-images.githubusercontent.com/65523997/162982140-a36a9447-9959-4b50-8767-c8a6a575fbe4.png)
+
 
