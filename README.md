@@ -76,3 +76,18 @@ loss函数
 
 ![image](https://user-images.githubusercontent.com/65523997/162980576-b18ccc39-53e7-4347-9b18-153129031a8e.png)
 
+
+
+架构很简单
+
+![image](https://user-images.githubusercontent.com/65523997/162980835-a9b1db8d-54b8-4b5e-9332-ce9800c52856.png)
+
+三任务联合训练时的loss
+
+![image](https://user-images.githubusercontent.com/65523997/162980926-722dbaa6-2b4f-4bf5-b7e0-40b3bd3f9ebe.png)
+
+如果将姿态任务添加进去呢？
+![loss (2)](https://user-images.githubusercontent.com/65523997/162981072-209f7fd5-34b5-4cd5-9036-af12e386e256.png)
+
+
+
