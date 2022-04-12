@@ -1,0 +1,19 @@
+cfg_model=yolo
+classes=1
+gpus = 0
+num_workers = 12
+batch_size = 12
+img_size = 416
+multi_scale = True
+epochs = 20
+train=/root/cv/dataset/人脸/datasets/yolo_widerface_open_train/anno/train.txt
+valid=/root/cv/dataset/人脸/datasets/yolo_widerface_open_train/anno/train.txt
+names=./cfg/face.names
+finetune_model =
+lr_step = 5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90
+lr0 = 4e-6
+
+#4e-6
+#valid=/www/dataset/yolo_helmet_train/yolo_helmet_train/anno/train.txt
+
+
