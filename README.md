@@ -43,6 +43,7 @@ loss函数
 
 96关键点检测多任务实现
 系统架构
+
 ![image](https://user-images.githubusercontent.com/65523997/162979445-10280313-8778-4775-bd1c-476f27eacd72.png)
 
 这里是多任务所使用的的loss函数
@@ -56,8 +57,7 @@ loss函数
 
 数据集的名称貌似是 wiki_crop_face_multi_task 格式如下
 
-![image](https://user-images.githubusercontent.com/65523997/162979844-1bd67402-f02a-4355-8428-9d6782cedea6.png)
-
+ 
 数据增强的逻辑
 
 送入网络中图像如下图所示：（第一排是原始图像，第二排是送入网络中的图像）
