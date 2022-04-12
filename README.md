@@ -23,3 +23,11 @@
  
  数据集说明：公开的数据集比较少超过68个关键点，其中比较有名的是Wider Facial Landmark in the Wild（WFLW），它提供了98个关键点。 WFLW 包含了 10000 张脸，其中 7500 用于训练，2500 张用于测试。除了关键点之外，还有遮挡、姿态、妆容、光照、模糊和表情等信息的标注。
  
+# 项目讲解
+# yoloV3
+使用U版就行没什么好说的
+数据集大家找找应该可以找到的 大概名称是yolo_widerface_open_train 我也不好乱发出来
+网络结构
+![image](https://user-images.githubusercontent.com/65523997/162977515-9d9c7aab-cea2-48c1-a507-901bc4ceacfa.png)
+![Uploading image.png…]()
+![Uploading image.png…]()
