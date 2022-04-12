@@ -12,8 +12,14 @@
 
 -2.第一个坑 提供的yoloV3 代码如果说自行训练，90%的概率梯度不下降，因为不是标准U版代码实现 没有使用梯度累计 数据增强 学习率退火等优化方法 ，
 如果你的显卡设备显存不够大 请不要使用此代码，batchsize太小了训练不出来啊
+
 -3.第二个坑 不要试图用本项目提供的yolov3-tiny代码尝试训练。。。 预测可以 但是NMS的实现貌似也跟U版有很大问题，自己联调的时候直接修改U版V3-SPP的NMS 
 如果有需求要同时检测多人就别改，不需要 仅检测一个人的数据则topk取1就行 当然了NMS还有其他两个阈值 也是要看个人喜好进行更改
--4.第三个坑 关键点检测与姿态识别的backbone都是使用resnet ，但是108关键点的输出头是三个多任务（关键点-年龄-性别）使用winloss联合训练，个人尝试过将姿态也
+![image](https://user-images.githubusercontent.com/65523997/162975652-47f50c12-f0ad-44b1-868d-b9dd12098bf1.png)
+![image](https://user-images.githubusercontent.com/65523997/162975918-87cf0247-a314-4df8-a5b3-283871eb89d7.png)
+
+-4.第三个坑 关键点检测与姿态识别的backbone都是使用resnet ，但是96关键点的输出头是三个多任务（关键点-年龄-性别）使用winloss联合训练，个人尝试过将姿态也
 加入winloss中进行进行联合训练，但是精度并不理想代码实现中也有
 ![image](https://user-images.githubusercontent.com/65523997/162975440-6e00f670-ee16-485b-b489-605ea7827986.png)
+数据集说明：公开的数据集比较少超过68个关键点，其中比较有名的是Wider Facial Landmark in the Wild（WFLW），它提供了98个关键点。 WFLW 包含了 10000 张脸，其中 7500 用于训练，2500 张用于测试。除了关键点之外，还有遮挡、姿态、妆容、光照、模糊和表情等信息的标注。
+![image](https://user-images.githubusercontent.com/65523997/162976516-f14a675b-a757-4b01-a211-14c0696eb3fa.png)
