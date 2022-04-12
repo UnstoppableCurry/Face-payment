@@ -20,6 +20,6 @@
  
 -4.第三个坑 关键点检测与姿态识别的backbone都是使用resnet ，但是96关键点的输出头是三个多任务（关键点-年龄-性别）使用winloss联合训练，个人尝试过将姿态也
 加入winloss中进行进行联合训练，但是精度并不理想代码实现中也有
-![image](https://user-images.githubusercontent.com/65523997/162975440-6e00f670-ee16-485b-b489-605ea7827986.png)
-数据集说明：公开的数据集比较少超过68个关键点，其中比较有名的是Wider Facial Landmark in the Wild（WFLW），它提供了98个关键点。 WFLW 包含了 10000 张脸，其中 7500 用于训练，2500 张用于测试。除了关键点之外，还有遮挡、姿态、妆容、光照、模糊和表情等信息的标注。
-![image](https://user-images.githubusercontent.com/65523997/162976516-f14a675b-a757-4b01-a211-14c0696eb3fa.png)
+ 
+ 数据集说明：公开的数据集比较少超过68个关键点，其中比较有名的是Wider Facial Landmark in the Wild（WFLW），它提供了98个关键点。 WFLW 包含了 10000 张脸，其中 7500 用于训练，2500 张用于测试。除了关键点之外，还有遮挡、姿态、妆容、光照、模糊和表情等信息的标注。
+ 
