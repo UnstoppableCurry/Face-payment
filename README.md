@@ -174,9 +174,14 @@ SeNet 通道注意力
    
    ![image](https://user-images.githubusercontent.com/65523997/162986190-6d070c63-772b-4d9e-b3bd-4267a8c96df2.png)
 
-![image](https://user-images.githubusercontent.com/65523997/162987440-eabe2ed3-8a57-4e6e-844c-29ac096b428b.png)
-![image](https://user-images.githubusercontent.com/65523997/162987479-1a7d7ae4-02b8-41f1-b926-11e5040a3bd2.png)
-![Uploading image.png…]()
+   ![image](https://user-images.githubusercontent.com/65523997/162987440-eabe2ed3-8a57-4e6e-844c-29ac096b428b.png)
+   ![image](https://user-images.githubusercontent.com/65523997/162987479-1a7d7ae4-02b8-41f1-b926-11e5040a3bd2.png)
+   ![image](https://user-images.githubusercontent.com/65523997/162987910-7cf17d6c-a28f-4e9d-be3a-9e9059d71cff.png)
+   ![image](https://user-images.githubusercontent.com/65523997/162987953-01ed666b-25fc-413a-8be1-4dc9b3b405c1.png)
+ 
+    本质就是一个多分类网络 屁股上加一个softmax 和 argmax就知道是谁 输出值还能得到置信度  很简单的思路 奥卡姆剃刀~
+    
 
+    
 
 
