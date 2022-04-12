@@ -28,6 +28,5 @@
 使用U版就行没什么好说的
 数据集大家找找应该可以找到的 大概名称是yolo_widerface_open_train 我也不好乱发出来
 网络结构
-![image](https://user-images.githubusercontent.com/65523997/162977515-9d9c7aab-cea2-48c1-a507-901bc4ceacfa.png)
-![Uploading image.png…]()
+ ![Uploading image.png…]()
 ![Uploading image.png…]()
