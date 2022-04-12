@@ -109,4 +109,23 @@ Batch越小,所需步长越大 但是问题来了
 
 ![image](https://user-images.githubusercontent.com/65523997/162982140-a36a9447-9959-4b50-8767-c8a6a575fbe4.png)
 
+效果图
+
+![image](https://user-images.githubusercontent.com/65523997/162982342-3b14c017-0615-43a4-a30b-27cb6f0cc2f9.png)
+
+# 姿态检测
+人脸姿态估计指的是根据一幅二维的人脸图像，计算出其在实际三维空间中的面部朝向。输入就是一张二维人脸图片，输出表示方位的三个旋转角度 (pitch, yaw, roll)（欧拉角），其中 pitch 表示俯仰角（关于x轴的旋转角度），yaw 表示偏航角（关于y轴的旋转角度），roll 表示翻滚角（关于z轴的旋转角度），分别对应则这抬头，摇头和转头，如下图所示（我们把人脸理解为一架向我们飞来的飞机）
+![image](https://user-images.githubusercontent.com/65523997/162982455-5571f626-7c37-4cf7-ac6f-d48647285819.png)
+
+
+数据集貌似叫这个  face_euler_angle_datasets  我是发不了 大家理解
+格式是这样的
+
+![image](https://user-images.githubusercontent.com/65523997/162982720-462ceb7d-5f17-48bb-8971-4dd5a7911c88.png)
+
+训练也很简单 就是直接回归欧拉角
+
+![image](https://user-images.githubusercontent.com/65523997/162982852-1e4ffbca-69f9-46a6-a1ec-3763f04289d0.png)
+
+
 
