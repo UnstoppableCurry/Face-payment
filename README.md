@@ -1,6 +1,6 @@
 # Face-payment
 源码实现提交
-效果demo：https://www.bilibili.com/video/BV1bL4y1s7Fr?spm_id_from=333.999.0.0   我的研究生女票~
+效果demo：[https://www.bilibili.com/video/BV1bL4y1s7Fr?spm_id_from=333.999.0.0 ](https://space.bilibili.com/452931925?spm_id_from=333.788.0.0)   
 # 本项目是人脸支付级别的 人脸项目 源码实现仅供交流学习使用 不可商用
 项目架构
 - 1.人脸检测实现目标框锁定
