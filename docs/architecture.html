@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>架构说明 · Face-payment</title>
+  <meta name="description" content="对照 README 与源码：YOLOv3 检测、ResNet 多任务关键点、欧拉角姿态门控、ArcFace 特征与 facebank。">
+  <link rel="canonical" href="https://unstoppablecurry.github.io/Face-payment/architecture.html">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="架构说明 · Face-payment">
+  <meta property="og:description" content="四段人脸流水线与仓库文件对照。静态说明，不是在线推理。">
+  <meta property="og:url" content="https://unstoppablecurry.github.io/Face-payment/architecture.html">
+  <meta property="og:image" content="https://unstoppablecurry.github.io/Face-payment/assets/img/readme-user-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&family=Noto+Serif+SC:wght@600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="assets/img/favicon.svg" alt="">
+        <span class="brand-text"><strong>Face-payment</strong><span>架构与结果展示</span></span>
+      </a>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav">菜单</button>
+      <nav id="site-nav" class="site-nav" data-site-nav aria-label="主导航">
+        <ul>
+          <li><a href="index.html">首页</a></li>
+          <li><a href="architecture.html" aria-current="page">架构</a></li>
+          <li><a href="results.html">结果</a></li>
+          <li><a href="demo.html">演示</a></li>
+          <li><a href="sources.html">来源</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="page-hero">
+      <div class="wrap">
+        <p class="kicker">Architecture</p>
+        <h1>四段流水线，对应仓库里的四个目录。</h1>
+        <p class="lede">文字依据 README「项目架构」与源码接口；表格给出可点击的文件路径。训练权重与数据不在仓库中。</p>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="table-wrap" tabindex="0">
+          <table>
+            <caption>模块与源码对照（路径相对于仓库根目录）</caption>
+            <thead>
+              <tr>
+                <th scope="col">阶段</th>
+                <th scope="col">README 说法</th>
+                <th scope="col">本仓库实现</th>
+                <th scope="col">源码里能直接读到的接口</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>检测</td>
+                <td>人脸检测，锁定目标框</td>
+                <td><a href="https://github.com/UnstoppableCurry/Face-payment/tree/master/yoloV3%20%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B"><code>yoloV3 人脸检测/</code></a></td>
+                <td><code>Yolov3</code> / <code>Yolov3Tiny</code>；<code>predict.py</code> 读视频、letterbox 到可配尺寸（常见 416）、NMS</td>
+              </tr>
+              <tr>
+                <td>关键点与属性</td>
+                <td>108 点矫正、年龄、性别；并可做活体思路</td>
+                <td><a href="https://github.com/UnstoppableCurry/Face-payment/tree/master/resnet%20108%E4%BA%BA%E8%84%B8%E5%85%B3%E9%94%AE%E7%82%B9"><code>resnet 108人脸关键点/</code></a></td>
+                <td>ResNet 多头：landmarks / gender / age / <code>ol</code>；默认训练 <code>num_classes=196</code>（98 点 × 坐标）；<code>wing_loss</code></td>
+              </tr>
+              <tr>
+                <td>姿态</td>
+                <td>欧拉角不符预期则不做身份校验</td>
+                <td><a href="https://github.com/UnstoppableCurry/Face-payment/tree/master/resnet34%20%E5%A7%BF%E6%80%81%E6%A3%80%E6%B5%8B"><code>resnet34 姿态检测/</code></a></td>
+                <td><code>predict.py</code> 输出 yaw、pitch、roll，并乘 90 还原角度量纲</td>
+              </tr>
+              <tr>
+                <td>识别</td>
+                <td>一对多；作者自述误检率与通过率</td>
+                <td><a href="https://github.com/UnstoppableCurry/Face-payment/tree/master/ArcFace"><code>ArcFace/</code></a></td>
+                <td><code>Backbone(ir_se, depth=50)</code>，512 维、112×112；<code>Arcface</code> 头 <code>s=64, m=0.5</code>；<code>make_facebank.py</code> 按人求平均特征</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>1. YOLOv3 人脸检测</h2>
+        <div class="prose">
+          <p>README 建议训练时直接使用 Ultralytics 风格的成熟实现，并给出上游教程仓库 <a href="https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/pytorch_object_detection/yolov3_spp">WZMIAOMIAO / yolov3_spp</a>（第三方）。本目录是作者自己联调的检测代码，<code>cfg/face.names</code> 只有一类 <code>Face</code>。</p>
+          <p>作者写明的坑：这份 YOLOv3「不是标准 U 版」，缺少梯度累积、数据增强与学习率退火等，自行训练「90% 的概率梯度不下降」；显存不够、batch 太小时训不出来。另写明不要用这里的 yolov3-tiny 去训练，预测尚可，但 NMS 与 U 版差异大；若只要单人，可把 topk 取 1。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>2. 关键点多任务</h2>
+        <div class="prose">
+          <p>README 标题写「人脸 108 关键点」，正文又写「96 关键点检测多任务」。源码默认 <code>num_classes=196</code>，注释说明是「关键点个数 × 2」，即 98 个点的 (x, y)。公开数据方面，README 点名 WFLW（98 点，第三方数据集，仓库未附带）。</p>
+          <p>共享 CNN 骨干后分出关键点、年龄、性别头；关键点与年龄用 Wing Loss，性别用交叉熵。README 说曾把姿态塞进同一套联合训练，效果不理想。部分脚本页眉写 <code>Author: Eric.Lee</code>，按上游注释保留，见来源页。</p>
+        </div>
+        <figure class="figure">
+          <span class="asset-tag">README user-images 配图 · 已核验下载</span>
+          <img src="assets/img/readme-user-image.png" width="672" height="428" alt="流程图：人脸图像进入 CNN 骨架，经共享特征后分成关键点、年龄、性别三个头，并分别标出 wing loss 与交叉熵损失。">
+          <figcaption>来自 README 首张 GitHub user-images 配图（<code>162975652-…png</code>）。图中是多任务头与损失，不是摄像头截图。仓库未单独声明该图是否改绘自论文，按 README 原图引用。</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>3. 姿态：欧拉角回归</h2>
+        <div class="prose">
+          <p>README 把人脸看成「朝观察者飞来的飞机」：pitch 抬头、yaw 摇头、roll 转头。实现上是 ResNet 回归三维，<code>resnet34 姿态检测/predict.py</code> 将网络输出乘 90 得到角度。README 说数据集名称类似 <code>face_euler_angle_datasets</code>，作者表示无法分发。</p>
+          <p>姿态在整条链路里的角色是门控：角度不符合预期就不进入 ArcFace。本仓库没有把四段脚本打成一个可运行的入口；README TODO 也写明联调部署代码尚未上传。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>4. ArcFace 与 facebank</h2>
+        <div class="prose">
+          <p>训练：<code>Backbone</code> 提 512 维 L2 归一化特征，<code>Arcface</code> 头做加性角度间隔，再用交叉熵。<code>config.py</code> 默认 <code>ir_se</code>、深度 50、输入 112×112、batch 128、里程碑学习率衰减。</p>
+          <p>建库：<code>make_facebank.py</code> 按人目录提取特征，可选水平翻转 TTA，再对同一人取平均，保存 <code>facebank.pth</code> 与 <code>names.npy</code>。</p>
+          <p>比对：README 批评预测阶段若用欧氏距离，阈值过小、半精度不友好。作者改回与训练一致的余弦 / 矩阵乘法，让阈值落在较大数值上，并便于把多帧做成更大 batch。具体距离计算见 <code>face_verify.py</code> 与 <code>效果评估.py</code>。</p>
+        </div>
+        <div class="pill-row" aria-label="源码中的默认超参">
+          <span class="pill">embedding 512</span>
+          <span class="pill">输入 112×112</span>
+          <span class="pill">ArcFace s=64 m=0.5</span>
+          <span class="pill">默认 ir_se-50</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><a href="index.html">返回首页</a> · <a href="results.html">下一页：结果与评估</a></p>
+      <p class="colophon">架构复述以 README 与当前 master 源码为准。未在仓库出现的服务端、SDK 或商用网关不会写进本页。</p>
+    </div>
+  </footer>
+  <script src="assets/js/site.js" defer></script>
+</body>
+</html>

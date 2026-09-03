@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Face-payment 静态展示：YOLO + 关键点/姿态 + ArcFace</title>
+  <meta name="description" content="Face-payment 是一份学习向 Python 源码：YOLOv3 人脸检测、ResNet 关键点与姿态、ArcFace 识别。本站是架构与结果说明，不能在浏览器里跑模型。">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://unstoppablecurry.github.io/Face-payment/">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:title" content="Face-payment 静态展示：YOLO + 关键点/姿态 + ArcFace">
+  <meta property="og:description" content="学习向人脸支付级流水线源码的架构与作者自述结果展示。不提供在线推理，不宣称商用部署。">
+  <meta property="og:url" content="https://unstoppablecurry.github.io/Face-payment/">
+  <meta property="og:image" content="https://unstoppablecurry.github.io/Face-payment/assets/img/readme-user-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&family=Noto+Serif+SC:wght@600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "Face-payment",
+    "description": "学习向 Python 人脸检测、关键点、姿态与 ArcFace 识别源码。静态站点仅作架构与结果说明。",
+    "url": "https://unstoppablecurry.github.io/Face-payment/",
+    "codeRepository": "https://github.com/UnstoppableCurry/Face-payment",
+    "programmingLanguage": "Python",
+    "inLanguage": "zh-CN",
+    "isAccessibleForFree": true,
+    "creativeWorkStatus": "Incomplete",
+    "discussionUrl": "https://www.bilibili.com/video/BV1bL4y1s7Fr"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="assets/img/favicon.svg" alt="">
+        <span class="brand-text">
+          <strong>Face-payment</strong>
+          <span>架构与结果展示</span>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav">菜单</button>
+      <nav id="site-nav" class="site-nav" data-site-nav aria-label="主导航">
+        <ul>
+          <li><a href="index.html" aria-current="page">首页</a></li>
+          <li><a href="architecture.html">架构</a></li>
+          <li><a href="results.html">结果</a></li>
+          <li><a href="demo.html">演示</a></li>
+          <li><a href="sources.html">来源</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap">
+        <p class="kicker">学习交流 · 源码实现 · 不可商用</p>
+        <h1>人脸支付级流水线的静态说明，不是能在浏览器里刷脸的演示。</h1>
+        <p class="lede">本仓库用 Python / PyTorch 串起检测、关键点、姿态与 ArcFace 识别。GitHub Pages 只能托管静态页，因此这里如实写架构、作者自述结果和已有 B 站录像，不伪造在线推理、商用客户或收益。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="demo.html">观看 B 站演示 BV1bL4y1s7Fr</a>
+          <a class="btn btn-ghost" href="architecture.html">阅读四段架构</a>
+          <a class="btn btn-ghost" href="https://github.com/UnstoppableCurry/Face-payment">打开 GitHub 源码</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <aside class="notice" aria-label="使用边界">
+          <strong>本站不能运行模型。</strong>
+          <p>推理依赖本地 GPU、训练权重与未公开数据。仓库 README 写明：不提供已训练模型与数据集，源码仅供交流学习，不可商用。联调部署代码在 README 的 TODO 中，尚未上传。</p>
+        </aside>
+        <h2>README 记载的四段流水线</h2>
+        <p class="prose">下列步骤来自仓库 README 的「项目架构」，并对照目录中的实现文件。方框只说明顺序，不代表本站可以调用这些网络。</p>
+        <ol class="grid-4" style="list-style:none;padding:0;margin:1.25rem 0 0;">
+          <li class="step">
+            <span class="step-num" aria-hidden="true">1</span>
+            <h3>人脸检测</h3>
+            <p>用目标框锁定人脸。实现目录：<span class="path">yoloV3 人脸检测/</span>，含 <code>Yolov3</code> 与 <code>Yolov3Tiny</code>。</p>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">2</span>
+            <h3>108 关键点</h3>
+            <p>做人脸矫正、年龄与性别；README 还提到可用眼部关键点横纵比做活体思路。目录：<span class="path">resnet 108人脸关键点/</span>。</p>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">3</span>
+            <h3>姿态门控</h3>
+            <p>回归欧拉角 pitch / yaw / roll；README 写明角度不符合预期时不做身份校验。目录：<span class="path">resnet34 姿态检测/</span>。</p>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">4</span>
+            <h3>ArcFace 识别</h3>
+            <p>一对多比对。作者在 README 自述：约十万分之一误检率时通过准确率 50%。目录：<span class="path">ArcFace/</span>。</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>本页能核实的内容</h2>
+        <div class="grid-3">
+          <article class="card">
+            <h3>仓库源码</h3>
+            <p>四个模块的训练、预测与评估脚本都在默认分支里。本站只引用这些文件与 README，不补充未提交的部署服务。</p>
+            <p><a href="architecture.html">查看模块对照表</a></p>
+          </article>
+          <article class="card">
+            <h3>作者自述结果</h3>
+            <p>评估口径写在 README：FAR / FRR，以及 8 人自采数据上的一组阈值观察。仓库内另有 <code>ArcFace/loss.png</code> 训练曲线。</p>
+            <p><a href="results.html">阅读结果页与限制</a></p>
+          </article>
+          <article class="card">
+            <h3>已有演示录像</h3>
+            <p>README 给出的效果 demo 是哔哩哔哩 <a href="https://www.bilibili.com/video/BV1bL4y1s7Fr">BV1bL4y1s7Fr</a>。这是第三方托管视频，不是本站生成的推理。</p>
+            <p><a href="demo.html">嵌入与备用链接</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>明确不会出现在本站的内容</h2>
+        <div class="prose">
+          <ul>
+            <li>不提供摄像头、上传人脸或「立即支付」交互。</li>
+            <li>不编造上线系统、商户、用户量、时延或收入。</li>
+            <li>不把作者自述指标写成第三方评测或生产 SLA。</li>
+            <li>不把 README 里其它未逐张核验的论文配图整页转载；第三方材料单独标注，见 <a href="sources.html">来源页</a>。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <h2>关于这些页面</h2>
+          <p>静态 GitHub Pages，计划地址 <a href="https://unstoppablecurry.github.io/Face-payment/">unstoppablecurry.github.io/Face-payment</a>。源码仓库 <a href="https://github.com/UnstoppableCurry/Face-payment">UnstoppableCurry/Face-payment</a>。</p>
+        </div>
+        <div>
+          <h2>页面</h2>
+          <ul>
+            <li><a href="architecture.html">架构</a></li>
+            <li><a href="results.html">结果</a></li>
+            <li><a href="demo.html">演示</a></li>
+            <li><a href="sources.html">来源与标注</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>站外</h2>
+          <ul>
+            <li><a href="https://www.bilibili.com/video/BV1bL4y1s7Fr">B 站演示</a></li>
+            <li><a href="https://github.com/UnstoppableCurry/Face-payment/blob/master/README.md">仓库 README</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="colophon">中文为主要语言。页面只说明学习向源码，不构成支付产品、安全认证或商用许可。</p>
+    </div>
+  </footer>
+  <script src="assets/js/site.js" defer></script>
+</body>
+</html>

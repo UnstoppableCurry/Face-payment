@@ -1,6 +1,10 @@
 # Face-payment
 源码实现提交
-效果demo：[https://www.bilibili.com/video/BV1bL4y1s7Fr?spm_id_from=333.999.0.0 ](https://space.bilibili.com/452931925?spm_id_from=333.788.0.0)   
+
+静态展示页（架构 / 作者自述结果 / B 站录像，**不能**在浏览器里跑模型）：<https://unstoppablecurry.github.io/Face-payment/>  
+页面源文件在 [`docs/`](docs/)，由 GitHub Actions 官方静态 Pages 工作流发布。
+
+效果demo：[https://www.bilibili.com/video/BV1bL4y1s7Fr](https://www.bilibili.com/video/BV1bL4y1s7Fr)（README 原文也曾链到作者空间 https://space.bilibili.com/452931925 ）
 # 本项目是人脸支付级别的 人脸项目 源码实现仅供交流学习使用 不可商用
 项目架构
 - 1.人脸检测实现目标框锁定

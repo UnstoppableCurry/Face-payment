@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>演示录像 · Face-payment</title>
+  <meta name="description" content="Face-payment 无法在浏览器推理。官方效果演示是哔哩哔哩 BV1bL4y1s7Fr，本页嵌入并提供原文链接。">
+  <link rel="canonical" href="https://unstoppablecurry.github.io/Face-payment/demo.html">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="演示录像 · Face-payment">
+  <meta property="og:description" content="嵌入 README 标明的 Bilibili 演示 BV1bL4y1s7Fr。第三方站点托管。">
+  <meta property="og:url" content="https://unstoppablecurry.github.io/Face-payment/demo.html">
+  <meta property="og:image" content="https://unstoppablecurry.github.io/Face-payment/assets/img/readme-user-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&family=Noto+Serif+SC:wght@600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="assets/img/favicon.svg" alt="">
+        <span class="brand-text"><strong>Face-payment</strong><span>架构与结果展示</span></span>
+      </a>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav">菜单</button>
+      <nav id="site-nav" class="site-nav" data-site-nav aria-label="主导航">
+        <ul>
+          <li><a href="index.html">首页</a></li>
+          <li><a href="architecture.html">架构</a></li>
+          <li><a href="results.html">结果</a></li>
+          <li><a href="demo.html" aria-current="page">演示</a></li>
+          <li><a href="sources.html">来源</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="page-hero">
+      <div class="wrap">
+        <p class="kicker">Demo</p>
+        <h1>能看的是作者上传的录像，不是这个静态站在推理。</h1>
+        <p class="lede">README 第一行把「效果 demo」指向 BV1bL4y1s7Fr。视频由哔哩哔哩托管；嵌入失败时请用下方原文链接。</p>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="wrap">
+        <aside class="notice">
+          <strong>第三方嵌入。</strong>
+          <p>播放器来自 <code>player.bilibili.com</code>，需要访问 B 站域名。部分网络或浏览器策略会拦截 iframe。这不影响仓库本身，只影响本页能否内嵌。</p>
+        </aside>
+
+        <div class="card">
+          <h2 style="margin-top:0;font-family:var(--font-serif);">BV1bL4y1s7Fr</h2>
+          <p>README 原文同时链到作者空间 <a href="https://space.bilibili.com/452931925">space.bilibili.com/452931925</a>（Markdown 写法把视频 URL 显示成了空间链接）。本页以稿件 BV 号为准，空间链接仅作 README 对照。</p>
+          <div class="video-frame">
+            <iframe
+              src="https://player.bilibili.com/player.html?isOutside=true&amp;bvid=BV1bL4y1s7Fr&amp;p=1&amp;high_quality=1&amp;danmaku=0"
+              title="哔哩哔哩演示视频 BV1bL4y1s7Fr"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <p class="hero-actions" style="margin-bottom:0;">
+            <a class="btn btn-primary" href="https://www.bilibili.com/video/BV1bL4y1s7Fr">在哔哩哔哩打开 BV1bL4y1s7Fr</a>
+            <a class="btn btn-ghost" href="https://space.bilibili.com/452931925">README 中的作者空间</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>若你想在本地复现，而不是在这个网站上点按钮</h2>
+        <div class="prose">
+          <p>仓库是训练与单模块预测脚本，不是浏览器应用。README 还列了这些硬限制：</p>
+          <ul>
+            <li>不提供已训练模型与涉及隐私的数据；非隐私数据需自行寻找公开集。</li>
+            <li>本目录 YOLOv3 自行训练容易不收敛；作者建议参考上游 yolov3_spp 教程。</li>
+            <li>「整理下部署代码搞上来」仍在 TODO：自动录入、多模块联调入口未进仓库。特征向量仍要靠这些源码计算。</li>
+          </ul>
+          <p>因此，把本页做成假的「对准摄像头即可支付」会直接违背仓库说明。真实动态请看上面的 B 站稿件。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><a href="results.html">上一页：结果</a> · <a href="sources.html">下一页：来源与标注</a></p>
+      <p class="colophon">Bilibili 是第三方平台。嵌入与外链都不改变视频版权归属，也不表示本 GitHub Pages 站点托管了该视频文件。</p>
+    </div>
+  </footer>
+  <script src="assets/js/site.js" defer></script>
+</body>
+</html>

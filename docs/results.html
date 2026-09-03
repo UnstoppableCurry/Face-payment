@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>结果与评估 · Face-payment</title>
+  <meta name="description" content="仅转述 README 作者自述指标与仓库内 ArcFace/loss.png。8 人数据、无公开权重，不是生产评测。">
+  <link rel="canonical" href="https://unstoppablecurry.github.io/Face-payment/results.html">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="结果与评估 · Face-payment">
+  <meta property="og:description" content="作者自述 FAR/FRR 与仓库内训练损失曲线。无独立复现、无商用精度声明。">
+  <meta property="og:url" content="https://unstoppablecurry.github.io/Face-payment/results.html">
+  <meta property="og:image" content="https://unstoppablecurry.github.io/Face-payment/assets/img/arcface-loss.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&family=Noto+Serif+SC:wght@600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="assets/img/favicon.svg" alt="">
+        <span class="brand-text"><strong>Face-payment</strong><span>架构与结果展示</span></span>
+      </a>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav">菜单</button>
+      <nav id="site-nav" class="site-nav" data-site-nav aria-label="主导航">
+        <ul>
+          <li><a href="index.html">首页</a></li>
+          <li><a href="architecture.html">架构</a></li>
+          <li><a href="results.html" aria-current="page">结果</a></li>
+          <li><a href="demo.html">演示</a></li>
+          <li><a href="sources.html">来源</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="page-hero">
+      <div class="wrap">
+        <p class="kicker">Results</p>
+        <h1>只展示仓库里写过、或文件里存着的结果。</h1>
+        <p class="lede">下面两组数字来自 README 作者自述，不是本站复现，也不是第三方评测。没有延迟、吞吐或收入数据可引用，因此不写。</p>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="wrap">
+        <aside class="notice">
+          <strong>请把这些数字当成实验笔记，而不是产品指标。</strong>
+          <p>作者写明识别数据「一共就 8 个人」、且「没法发」。仓库不含模型权重。阈值扫描脚本是 <code>ArcFace/效果评估.py</code>，本环境未加载权重，故未重跑曲线。</p>
+        </aside>
+        <div class="grid-2">
+          <article class="card">
+            <p class="stat">约 1 / 100,000<small>作者自述误识率量级（README：十万分之一）</small></p>
+            <p>原文同时写「人脸识别实现一对多 十万分之一误检率 通过准确率 50%」。后文把同一观察说成：在该误识率下「50% 的准确率」「大体可以接受」，并说明人多了「相应的指标就越高」——这是作者对自己小样本的判断，不是公开榜单。</p>
+          </article>
+          <article class="card">
+            <p class="stat">8 人<small>README 写明的识别评估集规模</small></p>
+            <p>采集思路：用检测框从手机视频抽帧，再做仿射与旋转，使人脸居中正对。这套数据未进仓库。因此本站不能展示 1:N 检索界面，也不能声称可替换银行卡。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>README 中的 FAR / FRR 定义</h2>
+        <div class="prose">
+          <p>作者按相似度分档取阈值 S：</p>
+          <ul>
+            <li><strong>FRR(S)</strong> = 同人比对中低于 S 的数量 / 同人比对总数 × 100%</li>
+            <li><strong>FAR(S)</strong> = 非同人比对中不低于 S 的数量 / 非同人比对总数 × 100%</li>
+          </ul>
+          <p>注意 README 在小标题处把「错误拒绝率」与 FAR、「错误接受率」与 FRR 交叉标注，后文公式与 <code>效果评估.py</code> 打印的 <code>FRR</code>（自己不认自己）、<code>FAR</code>（别人认成自己）更接近常见用法。本站不改写作者公式，只提醒阅读时以公式和脚本注释为准。</p>
+          <p>脚本对一串阈值循环，打印正确率、FRR、FAR，并在 <code>FAR &lt;= 0.00001</code> 时输出「符合标准的情况」。这是作者自己的筛选条件，不是认证机构结论。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>仓库内训练曲线</h2>
+        <figure class="figure">
+          <span class="asset-tag">仓库文件 ArcFace/loss.png · 由 train.py 的 matplotlib 写出</span>
+          <img src="assets/img/arcface-loss.png" width="1200" height="900" alt="ArcFace 训练损失折线图：横轴约 0 到 400，纵轴约 0 到 40，蓝色 Loss 曲线在前 100 步快速下降后在较低区间波动。图例中 Loss 标签重复多次。">
+          <figcaption>
+            复制自仓库 <a href="https://github.com/UnstoppableCurry/Face-payment/blob/master/ArcFace/loss.png"><code>ArcFace/loss.png</code></a>。
+            <code>ArcFace/train.py</code> 每个 epoch 把累积的 <code>loss_list</code> 画成蓝线并 <code>savefig("./loss.png")</code>。
+            图例重复「Loss」是原图现象，本站未重绘。该图只说明某次训练损失在下降，不能单独推出识别率或支付可用性。
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>README 里写过、但本站不再当作「结果」的内容</h2>
+        <div class="prose">
+          <ul>
+            <li>关键点联合训练加姿态后「评估时效果很差」「即使调权也不理想」——这是失败实验记录，不是上线指标。</li>
+            <li>batch size 与拟合速度的一组对比图在 README 中，多为外部托管插图；本站未整页转载，避免把未核验的第三方图当成本项目仪表盘。</li>
+            <li>视觉联调请看 <a href="demo.html">B 站 BV1bL4y1s7Fr</a>，而不是本页的静态图。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><a href="architecture.html">上一页：架构</a> · <a href="demo.html">下一页：演示</a></p>
+      <p class="colophon">没有独立测试集成绩、没有延迟测量、没有客户案例。缺的字段保持空白，而不是用营销句子填上。</p>
+    </div>
+  </footer>
+  <script src="assets/js/site.js" defer></script>
+</body>
+</html>
