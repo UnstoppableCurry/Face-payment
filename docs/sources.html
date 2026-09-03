@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>来源与标注 · Face-payment</title>
+  <meta name="description" content="标注 Face-payment 展示页用到的仓库文件、README 配图、B 站视频以及源码中的上游引用。">
+  <link rel="canonical" href="https://unstoppablecurry.github.io/Face-payment/sources.html">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="来源与标注 · Face-payment">
+  <meta property="og:description" content="第三方与上游材料清单。本展示页不把它们写成原创评测或商用案例。">
+  <meta property="og:url" content="https://unstoppablecurry.github.io/Face-payment/sources.html">
+  <meta property="og:image" content="https://unstoppablecurry.github.io/Face-payment/assets/img/readme-user-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&family=Noto+Serif+SC:wght@600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="assets/img/favicon.svg" alt="">
+        <span class="brand-text"><strong>Face-payment</strong><span>架构与结果展示</span></span>
+      </a>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav">菜单</button>
+      <nav id="site-nav" class="site-nav" data-site-nav aria-label="主导航">
+        <ul>
+          <li><a href="index.html">首页</a></li>
+          <li><a href="architecture.html">架构</a></li>
+          <li><a href="results.html">结果</a></li>
+          <li><a href="demo.html">演示</a></li>
+          <li><a href="sources.html" aria-current="page">来源</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="page-hero">
+      <div class="wrap">
+        <p class="kicker">Sources</p>
+        <h1>每一张图、每一段指标、每一条外链都标来处。</h1>
+        <p class="lede">本站是说明页，不是论文。第三方论文插图、公开数据集和 B 站播放器都按「引用」处理，不改写成项目自有资产。</p>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>本站实际使用的素材</h2>
+        <div class="table-wrap" tabindex="0">
+          <table>
+            <caption>已核验并写入 docs/ 的材料</caption>
+            <thead>
+              <tr>
+                <th scope="col">材料</th>
+                <th scope="col">类型</th>
+                <th scope="col">来处</th>
+                <th scope="col">本站用法</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>架构文字</td>
+                <td>本仓库</td>
+                <td><a href="https://github.com/UnstoppableCurry/Face-payment/blob/master/README.md">README.md</a> 与各目录 <code>.py</code></td>
+                <td>复述流水线与接口，不补充未提交模块</td>
+              </tr>
+              <tr>
+                <td><code>arcface-loss.png</code></td>
+                <td>本仓库</td>
+                <td><code>ArcFace/loss.png</code>（<code>train.py</code> 保存）</td>
+                <td>结果页原图引用，未重绘</td>
+              </tr>
+              <tr>
+                <td><code>readme-user-image.png</code></td>
+                <td>README 托管图</td>
+                <td>GitHub user-images <code>65523997/162975652-…png</code></td>
+                <td>架构页配图；未声明是否改绘论文，故标「README 原图」</td>
+              </tr>
+              <tr>
+                <td>BV1bL4y1s7Fr</td>
+                <td>第三方视频</td>
+                <td><a href="https://www.bilibili.com/video/BV1bL4y1s7Fr">bilibili.com/video/BV1bL4y1s7Fr</a></td>
+                <td>演示页嵌入官方播放器，并保留外链</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>源码与 README 点名的上游 / 第三方</h2>
+        <div class="prose">
+          <ul>
+            <li><strong>YOLOv3 系实现：</strong><code>yoloV3 人脸检测/test.py</code> 注释指向 <a href="https://github.com/ultralytics/yolov3">ultralytics/yolov3</a> 与 <a href="https://github.com/TencentYoutuResearch/ObjectDetection-OneStageDet">TencentYoutuResearch/ObjectDetection-OneStageDet</a>。<code>util/utils.py</code> 标注 Object-Detection-Metrics、py-faster-rcnn 等片段来源。</li>
+            <li><strong>作者推荐的训练教程：</strong><a href="https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/pytorch_object_detection/yolov3_spp">deep-learning-for-image-processing / yolov3_spp</a>。这是上游教程，不是本仓库子模块。</li>
+            <li><strong>ResNet / ImageNet 权重：</strong>关键点与姿态 <code>model.py</code> 使用 PyTorch 官方 <code>resnet18</code>–<code>resnet152</code> URL。骨干网络来自 He et al. 的 ResNet 一族。</li>
+            <li><strong>Wing Loss：</strong><code>resnet 108人脸关键点/loss.py</code> 实现 README 所述的分段对数 / L1 形式。</li>
+            <li><strong>ArcFace / SE-IR：</strong>角度间隔损失与 <code>SEModule</code> 对应 ArcFace、SENet 一类方法；本目录是学习向实现，不是官方 InsightFace 发行包。</li>
+            <li><strong>关键点脚本署名：</strong><code>predict.py</code>、<code>inference.py</code>、<code>data_agu.py</code> 等页眉写 <code>Author: Eric.Lee</code>，按文件内注释视为上游或共同来源，不改成「本展示页原创」。</li>
+            <li><strong>点名但未随仓库提供的数据：</strong>README 提到 <code>yolo_widerface_open_train</code>、WFLW、<code>wiki_crop_face_multi_task</code>、<code>face_euler_angle_datasets</code> 以及 8 人自采 1:N 集。本站不镜像这些数据。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>刻意没有搬进本站的 README 插图</h2>
+        <div class="prose">
+          <p>README 里还有大量 <code>user-images.githubusercontent.com</code> 图：YOLO 结构、学习率曲线、Wing Loss 公式表、姿态示意、孪生网络与 FRR-FAR 曲线等。其中不少看起来像论文或教程截图。本站只核验并收录了首张 user-images 配图，以及仓库内的 <code>ArcFace/loss.png</code>，避免把未逐张授权说明的第三方图册做成「项目相册」。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>使用声明（来自 README，不是本站发明的许可证名）</h2>
+        <div class="callout">
+          <p>README 原文大意：这是「人脸支付级别」的人脸项目源码，<strong>仅供交流学习，不可商用</strong>；不提供训练好的模型与数据。本展示页同样适用：可以阅读说明，不能把它当成支付系统、生物识别认证或商业交付物。</p>
+        </div>
+        <dl class="meta" style="margin-top:1.5rem;">
+          <dt>代码仓库</dt>
+          <dd><a href="https://github.com/UnstoppableCurry/Face-payment">github.com/UnstoppableCurry/Face-payment</a></dd>
+          <dt>计划站点</dt>
+          <dd><a href="https://unstoppablecurry.github.io/Face-payment/">unstoppablecurry.github.io/Face-payment</a></dd>
+          <dt>工作流</dt>
+          <dd>官方 GitHub Actions 静态 Pages 模板，发布目录为 <code>docs/</code></dd>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><a href="demo.html">上一页：演示</a> · <a href="index.html">回到首页</a></p>
+      <p class="colophon">字体由 Google Fonts 提供（Noto Sans SC / Noto Serif SC / Source Serif 4），属第三方网络字体，可在无外网时回退到系统字体。</p>
+    </div>
+  </footer>
+  <script src="assets/js/site.js" defer></script>
+</body>
+</html>
